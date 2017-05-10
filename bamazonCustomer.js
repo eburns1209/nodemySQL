@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
     port:3306,
     user : "root",
     password : password,
-    database : "Bamazon_db"
+    database : "bamazon_db"
 });
 
 connection.connect(function(err) {
@@ -20,7 +20,7 @@ connection.connect(function(err) {
 
 
 var table = function (){
-	connection.query("SELECT * FROM products", function (err, res){
+	connection.query("SELECT * FROM products2", function (err, res){
 		//console.log(res);
 		for(var i=0; i<res.length; i++){
 			console.log(res[i].item_id + " || " +
@@ -46,6 +46,7 @@ var userSelect = function (){
 					correct = true;
 					var product = answer.choice;
 					var id = i;
+					
 					inquirer.prompt({
 						name:"quant",
 						type: "input",
