@@ -1,0 +1,24 @@
+{
+  "name": "nodesql",
+  "version": "1.0.0",
+  "description": "customer accounts",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eburns1209/nodemySQL.git"
+  },
+  "author": "e. stowe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eburns1209/nodemySQL/issues"
+  },
+  "homepage": "https://github.com/eburns1209/nodemySQL#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "inquirer": "^3.0.6",
+    "mysql": "^2.13.0"
+  }
+}
