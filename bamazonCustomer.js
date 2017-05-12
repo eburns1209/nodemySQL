@@ -39,14 +39,14 @@ var userSelect = function (){
 		type: "input",
 		message: "What would you like to buy? [Quit with Q]"
 	}]).then(function(answer){
-		connection.query("SELECT * FROM products", function (err, res){
+		connection.query("SELECT * FROM products2", function (err, res){
 		var correct = false;
 			for (var i = 0; i <res.length; i ++){
 				if (res[i].product_name == answer.choice){
 					correct = true;
 					var product = answer.choice;
 					var id = i;
-					
+
 					inquirer.prompt({
 						name:"quant",
 						type: "input",
@@ -59,14 +59,22 @@ var userSelect = function (){
 							}
 						}
 					}).then(function(answer){
-						// if((res[id].stock_quantity=answer.quant)>0){
-						// connection.query("UPDATE products SET stock_quantity= " + 
-						// 	(res[id].stock_quantity=answer.quant) , function (err, res){
+						
+						//if((res[i].stock_quantity-answer.quant)> 0){
+
+						console.log(answer.quant);
+						connection.query("UPDATE products2 SET stock_quantity = ' " + (res[i].stock_quantity-answer.quant) + " 'WHERE product_name= ' " + answer.choice + " ' ", function (err, res2){
+						// 		console.log("Product Bought!");
+						// 		table();
+							//})
+						// }else{
+						// 	console.log("Not a valid selection");
+						// 	userSelect();
+						 //}
 											
 
-						console.log("Product Bought!");
-						table();
-						//})
+						
+						})
 					//}//second if
 				})//second then
 			}//big if
@@ -74,6 +82,20 @@ var userSelect = function (){
 	})			
 })
 }
+
+// var checkQuantity = function (answer){
+// 	var query = "SELECT stock_quantity FROM products2 WHERE item_id = ?";
+// 	connection.query(query, function (err,res){
+// 		if (res[i].stock_quantity < answer.quant){
+// 			console.log("Insufficient quantity");
+// 		}
+// 		//else{
+// 		// 	var total = answer.quant * res[i].price;
+// 		// 	var newQuantity = res[i].stock_quantity-answer.quant;
+// 		// 	//updateQuantity(answer.quant, total, newQuantity);
+// 		// }
+// 	})
+// }
 
 // var start = function(){
 // 	inquirer.prompt([{
