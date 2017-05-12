@@ -44,8 +44,9 @@ var userSelect = function (){
 			for (var i = 0; i <res.length; i ++){
 				if (res[i].product_name == answer.choice){
 					correct = true;
-					var product = answer.choice;
-					var id = i;
+					//console.log(answer.choice);
+					//var product = answer.choice;
+					//var id = i;
 
 					inquirer.prompt({
 						name:"quant",
@@ -60,21 +61,19 @@ var userSelect = function (){
 						}
 					}).then(function(answer){
 						
-						//if((res[i].stock_quantity-answer.quant)> 0){
-
-						console.log(answer.quant);
-						connection.query("UPDATE products2 SET stock_quantity = ' " + (res[i].stock_quantity-answer.quant) + " 'WHERE product_name= ' " + answer.choice + " ' ", function (err, res2){
-						// 		console.log("Product Bought!");
-						// 		table();
-							//})
-						// }else{
-						// 	console.log("Not a valid selection");
-						// 	userSelect();
+						if((res[i].stock_quantity-answer.quant)> 0){
+							connection.query("UPDATE products2 SET stock_quantity= ' "
+								+ (res[i].stock_quantity-answer.quant) + " ' WHERE product_name= ' "
+								+ answer.choice + " ' ", function (err, res2){
+									console.log("product bought");
+									table();
+								})
 						 //}
+						}
 											
 
 						
-						})
+					//	})
 					//}//second if
 				})//second then
 			}//big if
@@ -83,69 +82,3 @@ var userSelect = function (){
 })
 }
 
-// var checkQuantity = function (answer){
-// 	var query = "SELECT stock_quantity FROM products2 WHERE item_id = ?";
-// 	connection.query(query, function (err,res){
-// 		if (res[i].stock_quantity < answer.quant){
-// 			console.log("Insufficient quantity");
-// 		}
-// 		//else{
-// 		// 	var total = answer.quant * res[i].price;
-// 		// 	var newQuantity = res[i].stock_quantity-answer.quant;
-// 		// 	//updateQuantity(answer.quant, total, newQuantity);
-// 		// }
-// 	})
-// }
-
-// var start = function(){
-// 	inquirer.prompt([{
-// 		name: "Item",
-// 		type: "rawlist",
-// 		message: "What are you looking for?",
-// 		choices:["animals", "jewelry", "electronics", "accessories", "kitchen", "books"]
-// 	}]).then(function(answer){
-// 		switch (answer.Item){
-// 			case "animals":
-// 				animals();
-// 			break;
-
-// 			case "jewelry":
-// 				jewelry();
-// 			break;
-
-// 			case "electronics":
-// 				electronics();
-// 			break;
-
-// 			case "accessories":
-// 				accessories();
-// 			break;
-
-// 			case "kitchen":
-// 				kitchen();
-// 			break;
-
-// 			case "books":
-// 				books();
-// 			break;
-// 		}
-
-// 	});
-		
-// };
-
-// var animals = function () {
-// 	inquirer.prompt([{
-// 		name:"animals",
-// 		type: "input",
-// 		message: "What animal would you like to search for?"
-// 	}]).then(function(answer){
-// 		var query = "SELECT item_id, product_name FROM products WHERE ? ";
-// 		connection.query(query, {animals:answer.animals}, function (err, res){
-// 			console.log("it worked");
-// 			// for (var i = 0; i < res.length; i ++){
-// 			// }
-// 			start();
-// 		})
-// 	})
-// }
