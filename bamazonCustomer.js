@@ -45,8 +45,8 @@ var userSelect = function (){
 				if (res[i].product_name == answer.choice){
 					correct = true;
 					//console.log(answer.choice);
-					//var product = answer.choice;
-					//var id = i;
+					var product = answer.choice;
+					var id = i;
 
 					inquirer.prompt({
 						name:"quant",
@@ -60,11 +60,13 @@ var userSelect = function (){
 							}
 						}
 					}).then(function(answer){
-						
-						if((res[i].stock_quantity-answer.quant)> 0){
+						//console.log(res[id]);
+						if((res[id].stock_quantity-answer.quant)> 0){
+							
 							connection.query("UPDATE products2 SET stock_quantity= ' "
-								+ (res[i].stock_quantity-answer.quant) + " ' WHERE product_name= ' "
-								+ answer.choice + " ' ", function (err, res2){
+								+ (res[id].stock_quantity-answer.quant) + " ' WHERE product_name= ' "
+								+ product + " ' ", function (err, res2){
+									//console.log(res);
 									console.log("product bought");
 									table();
 								})
