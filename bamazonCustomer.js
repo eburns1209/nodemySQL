@@ -60,27 +60,53 @@ var userSelect = function (){
 							}
 						}
 					}).then(function(answer){
-						//console.log(res[id]);
-						if((res[id].stock_quantity-answer.quant)> 0){
+						//var isInStock = [];
+						console.log(res[id]);
+						if((res[id].stock_quantity-answer.quant)>0){
+							//connection.query('SELECT item_id, product_name, department_name, price, stock_quantity FROM products2 WHERE stock_quantity ='+product, function(err, res){
+							 
+                        if (err) throw err;
+                            connection.query('UPDATE products2 SET stock_quantity = '+(res[id].stock_quantity-answer.quant)+' WHERE products2 ='+product, function(err, res){
+                                console.log(res);
+                            }); 
+                        //});
 							
-							connection.query("UPDATE products2 SET stock_quantity= ' "
-								+ (res[id].stock_quantity-answer.quant) + " ' WHERE product_name= ' "
-								+ product + " ' ", function (err, res2){
 									//console.log(res);
 									console.log("product bought");
 									table();
-								})
+							//	})
 						 //}
 						}
 											
 
 						
-					//	})
+						//})
 					//}//second if
 				})//second then
 			}//big if
 		}//for loop
 	})			
 })
+
+
+
+// var checkQuantity = function(answer) {
+//   var query = 'SELECT stock_quantity, price, department_name FROM products2 WHERE item_id = ?';
+//   var params = answer.id;
+//   connection.query(query, params, function(err, res) {
+//     //if (res[i].stock_quantity < answer.quant) {
+//     	console.log(res[].stock_quantity);
+//       //console.log(chalk.bold.red('Insufficient quantity.  Please select a quantity equal to or below ' + res[0].StockQuantity) + '.');
+//       //chooseItem(max);
+//     // } 
+//     //else {
+//     //   var total = answer.quant * res[i].Price;
+//     //   var newQuantity = res[i].stock_quantity-answer.quant;
+//     //   updateQuantity(answer.id,total,newQuantity);
+//     //   queryTotal(res[i].department_name,total);
+//     // }
+//   });
+// };
+
 }
 
